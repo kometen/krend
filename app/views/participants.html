@@ -1,0 +1,15 @@
+<div class="container participants-page">
+	<div class="participant row" ng-repeat="(participantId, participant) in participants">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-md-9 col-xs-11">
+			<div class="info">
+				{{ participant.name }} {{ participant.born }} {{ participant.club }}
+			</div>
+			<div>
+				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">delete</a>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
