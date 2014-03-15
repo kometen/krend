@@ -1,0 +1,37 @@
+<div class="container krend-page">
+	<div class="krend row">
+		<div class="col-md-9 col-xs-11">
+		<form class="navbar-form navbar-left" role="search" ng-submit="submitRace()" ng-show="signedIn()">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Name" ng-model="race.name">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Date" ng-model="race.date">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Location" ng-model="race.location">
+			</div>
+			<button type="submit" class="btn btn-default">Add Race</button>
+		</form>
+		</div>
+	</div>
+	<div class="krend row" ng-repeat="(raceId, race) in races">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-md-9 col-xs-11">
+			<div class="info" ng-show="signedIn()">
+				<a href="#" editable-text="race.name" onaftersave="updateRace(raceId, race)">{{ race.name }}</a>
+				<a href="#" editable-text="race.date" onaftersave="updateRace(raceId, race)">{{ race.date }}</a>
+				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
+				<a ng-click="deleteRace(raceId)" ng-show="signedIn() && race.owner === currentUser.username">(delete)</a>
+			</div>
+			<div class="info" ng-hide="signedIn()">
+				<a href="#/login">{{ race.name }}</a>
+				<a href="#/login">{{ race.date }}</a>
+				<a href="#/login">{{ race.location }}</a>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

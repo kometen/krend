@@ -1,0 +1,32 @@
+<div class="container krend-page">
+	<div class="krend row">
+		<div class="col-md-9 col-xs-11">
+		<form class="navbar-form navbar-left" role="search" ng-submit="submitClub()" ng-show="signedIn()">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Name" ng-model="club.name">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="City" ng-model="club.city">
+			</div>
+			<button type="submit" class="btn btn-default">Add Club</button>
+		</form>
+		</div>
+	</div>
+	<div class="krend row" ng-repeat="(clubId, club) in clubs">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-md-9 col-xs-11">
+			<div class="info" ng-show="signedIn()">
+				<a href="#" editable-text="club.name" onaftersave="updateClub(clubId, club)">{{ club.name }}</a>
+				<a href="#" editable-text="club.city" onaftersave="updateClub(clubId, club)">{{ club.city }}</a>
+				<a ng-click="deleteClub(clubId)" ng-show="signedIn() && club.owner === currentUser.username">(delete)</a>
+			</div>
+			<div class="info" ng-hide="signedIn()">
+				<a href="#/login">{{ club.name }}</a>
+				<a href="#/login">{{ club.city }}</a>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

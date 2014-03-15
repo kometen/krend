@@ -23,7 +23,6 @@ app.factory('Participant', function ($firebase, FIREBASE_URL, User) {
 			return participants.$child(participantId);
 		},
 		update: function (participantId, participant) {
-			console.log('id: ' + participantId + ', participant.name: ' + participant.name);
 			if (User.signedIn()) {
 				participants.$child(participantId).$update(participant);
 			}
