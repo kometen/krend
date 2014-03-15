@@ -5,8 +5,13 @@ var app = angular.module('krendApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'firebase'
+  'firebase',
+  'xeditable'
 ]);
+
+app.run(function(editableOptions){
+  editableOptions.theme = 'bs3'; // bootstrap3 theme
+});
 
 app.config(function ($routeProvider) {
     $routeProvider

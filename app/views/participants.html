@@ -1,13 +1,32 @@
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <div class="container participants-page">
+	<div class="participant row">
+		<div class="col-md-9 col-xs-11">
+		<form class="navbar-form navbar-left" role="search" ng-submit="submitParticipant()" ng-show="signedIn()">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Name" ng-model="participant.name">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Born" ng-model="participant.born">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Club" ng-model="participant.club">
+			</div>
+			<button type="submit" class="btn btn-default">Add Participant</button>
+		</form>
+		</div>
+	</div>
 	<div class="participant row" ng-repeat="(participantId, participant) in participants">
 		<div class="col-xs-1">
 		</div>
 		<div class="col-md-9 col-xs-11">
 			<div class="info">
-				{{ participant.name }} {{ participant.born }} {{ participant.club }}
+			{{ participantId }}
+				<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant)">{{ participant.name || "empty" }}</a>
+				<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant)">{{ participant.born || "empty" }}</a>
+				<a href="#" editable-text="participant.club" onaftersave="updateParticipant(participantId, participant)">{{ participant.club || "empty" }}</a>
+				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
 			</div>
-			<div>
-				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">delete</a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

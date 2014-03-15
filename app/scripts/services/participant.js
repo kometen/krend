@@ -22,6 +22,12 @@ app.factory('Participant', function ($firebase, FIREBASE_URL, User) {
 		find: function (participantId) {
 			return participants.$child(participantId);
 		},
+		update: function (participantId, participant) {
+			console.log('id: ' + participantId + ', participant.name: ' + participant.name);
+			if (User.signedIn()) {
+				participants.$child(participantId).$update(participant);
+			}
+		},
 		delete: function (participantId) {
 			if (User.signedIn()) {
 				var participant = Participant.find(participantId);
