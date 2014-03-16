@@ -6,6 +6,7 @@ var app = angular.module('krendApp', [
   'ngSanitize',
   'ngRoute',
   'xeditable',
+  'ui.bootstrap',
   'firebase'
 ]);
 

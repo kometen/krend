@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
+app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Race) {
 	if ($location.path() === '/') {
 		$scope.participants = Participant.all;
 	}
@@ -17,6 +17,10 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
 
 	$scope.deleteParticipant = function (participantId) {
 		Participant.delete(participantId);
+	};
+
+	$scope.getClubs = function () {
+		$scope.clubNames = Race.all;
 	};
 	
 });
