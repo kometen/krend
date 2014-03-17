@@ -19,6 +19,6 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
 		Participant.delete(participantId);
 	};
 
-	$scope.clubs = ['BBIL', 'STIL', 'Vikane IL'];
+	$scope.clubs = ['BBIL', 'STIL', 'Vikane IL', 'GFIL'];
 	
 });

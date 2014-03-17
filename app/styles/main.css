@@ -2,6 +2,7 @@ body {
   background: #F3F3F3;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /* NAV BAR */
 .nav-pic {
@@ -34,6 +35,8 @@ body {
   margin-left:5px;
 }
 
+.form-control {
+}
 
 /* PROFILE PAGE */
 .prof-img{
