@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Race) {
+app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
 	if ($location.path() === '/') {
 		$scope.participants = Participant.all;
 	}
@@ -19,8 +19,6 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Rac
 		Participant.delete(participantId);
 	};
 
-	$scope.getClubs = function () {
-		$scope.clubNames = Race.all;
-	};
+	$scope.clubs = ['BBIL', 'STIL', 'Vikane IL'];
 	
 });

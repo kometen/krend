@@ -9,7 +9,7 @@
 				<input type="text" class="form-control" placeholder="Born" ng-model="participant.born">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Club" ng-model="participant.club" typeahead="club for club in getClubs($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations">
+				<input type="text" class="form-control" placeholder="Club" ng-model="participant.club" typeahead="club for club in clubs | filter:$viewValue | limitTo:8">
 			</div>
 			<button type="submit" class="btn btn-default">Add Participant</button>
 		</form>
