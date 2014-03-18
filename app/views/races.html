@@ -5,8 +5,15 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Name" ng-model="race.name">
 			</div>
-			<div class="form-group input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-				<input type="text" class="form-control" placeholder="Date" ng-model="race.date">
+			<div class="form-group">
+				<div class="col-md-6">
+					<p class="input-group">
+						<input type="text" class="form-control" datepicker-popup="{{ format }}" ng-model="race.date" is-open="opened" min="minDate" max="'2020-12-32'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon-calendar"></i></button>
+						</span>
+					</p>
+				</div>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Location" ng-model="race.location">
@@ -21,7 +28,7 @@
 		<div class="col-md-9 col-xs-11">
 			<div class="info" ng-show="signedIn()">
 				<a href="#" editable-text="race.name" onaftersave="updateRace(raceId, race)">{{ race.name }}</a>
-				<a href="#" editable-text="race.date" onaftersave="updateRace(raceId, race)">{{ race.date }}</a>
+				<a href="#" editable-bsdate="race.date" e-datepicker-popup="dd-MM-yyyy" onaftersave="updateRace(raceId, race)">{{ race.date | date: "dd-MM-yyyy" }}</a>
 				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
 				<a ng-click="deleteRace(raceId)" ng-show="signedIn() && race.owner === currentUser.username">(delete)</a>
 			</div>
