@@ -41,6 +41,6 @@ app.factory('Club', function ($firebase, FIREBASE_URL, User) {
 			}
 		}
 	};
-	
+
 	return Club;
 });

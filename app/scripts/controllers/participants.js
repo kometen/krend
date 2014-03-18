@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
+app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Club) {
 	if ($location.path() === '/') {
 		$scope.participants = Participant.all;
 	}
@@ -20,5 +20,18 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant) {
 	};
 
 	$scope.clubs = ['BBIL', 'STIL', 'Vikane IL', 'GFIL'];
+
+	$scope.getClubNames = function () {
+		var clubs = Club.all;
+		var clubNames = [];
+
+		angular.forEach(clubs, function (value, key) {
+			if (value.name) {
+				console.log('value: ' + value.name + ', key: ' + key);
+				clubNames.push(value.name);
+			}
+		});
+		return clubNames;
+	};
 	
 });
