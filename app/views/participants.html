@@ -22,7 +22,9 @@
 			<div class="info" ng-show="signedIn()">
 				<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant)">{{ participant.name || "empty" }}</a>
 				<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant)">{{ participant.born || "empty" }}</a>
-				<a href="#" editable-text="participant.club" onaftersave="updateParticipant(participantId, participant)">{{ participant.club || "empty" }}</a>
+				<form ng-submit="updateParticipant(participantId, participant)" >
+					<input type="text" placeholder="Club" ng-model="participant.club" typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" typeahead-loading="loadingClubs">
+				</form>
 				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
 			</div>
 			<div class="info" ng-hide="signedIn()">

@@ -25,9 +25,8 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Clu
 		var clubs = Club.all;
 		var clubNames = [];
 
-		angular.forEach(clubs, function (value, key) {
+		angular.forEach(clubs, function (value) {
 			if (value.name) {
-				console.log('value: ' + value.name + ', key: ' + key);
 				clubNames.push(value.name);
 			}
 		});
