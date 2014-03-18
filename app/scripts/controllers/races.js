@@ -19,43 +19,44 @@ app.controller('RacesCtrl', function ($scope, $location, Race) {
 		Race.delete(raceId);
 	};
 
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
+	$scope.today = function() {
+		$scope.dt = new Date();
+	};
 
-  $scope.showWeeks = true;
-  $scope.toggleWeeks = function () {
-    $scope.showWeeks = ! $scope.showWeeks;
-  };
+	$scope.today();
 
-  $scope.clear = function () {
-    $scope.dt = null;
-  };
+	$scope.showWeeks = true;
+	$scope.toggleWeeks = function () {
+		$scope.showWeeks = ! $scope.showWeeks;
+	};
 
-  // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
+	$scope.clear = function () {
+		$scope.dt = null;
+	};
 
-  $scope.toggleMin = function() {
-    $scope.minDate = ( $scope.minDate ) ? null : new Date();
-  };
-  $scope.toggleMin();
+	// Disable weekend selection
+	$scope.disabled = function(date, mode) {
+		return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+	};
 
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+	$scope.toggleMin = function() {
+		$scope.minDate = ( $scope.minDate ) ? null : new Date();
+	};
+	$scope.toggleMin();
 
-    $scope.opened = true;
-  };
+	$scope.open = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
 
-  $scope.dateOptions = {
-    'year-format': 'yy',
-    'starting-day': 1
-  };
+		$scope.opened = true;
+	};
 
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-  $scope.format = $scope.formats[0];
+	$scope.dateOptions = {
+		'year-format': 'yy',
+		'starting-day': 1
+	};
+
+	$scope.formats = ['dd-MM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+	$scope.format = $scope.formats[0];
 	
 });
