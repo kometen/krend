@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Club) {
-	if ($location.path() === '/') {
+	if ($location.path() === '/participants') {
 		$scope.participants = Participant.all;
 	}
 	

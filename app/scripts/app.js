@@ -17,6 +17,10 @@ var app = angular.module('krendApp', [
 app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
+        templateUrl: 'views/active_race.html',
+        controller: 'ActiveRaceCtrl'
+      })
+      .when('/participants', {
         templateUrl: 'views/participants.html',
         controller: 'ParticipantsCtrl'
       })

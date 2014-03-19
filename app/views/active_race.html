@@ -1,0 +1,35 @@
+<div class="container krend-page">
+	<div class="krend row">
+		<div class="col-md-9 col-xs-11">
+			<tabset>
+				<tab heading="Active Race">Active Race</tab>
+				<tab ng-repeat="tab in tabs" heading="{{ tab.title }}" active="tab.active" disabled="tab.disabled">
+					{{ tab.content }}
+				</tab>
+				<tab select="alertMe()">
+					<tab-heading>
+						<i class="glyphicon glyphicon-bell"></i> Alert!
+					</tab-heading>
+					I've got an HTML heading, and a select callback. Pretty cool!
+				</tab>
+			</tabset>
+		</div>
+	</div>
+	<div class="krend row" ng-repeat="(clubId, club) in clubs">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-md-9 col-xs-11">
+			<div class="info" ng-show="signedIn()">
+				<a href="#" editable-text="club.name" onaftersave="updateClub(clubId, club)">{{ club.name }}</a>
+				<a href="#" editable-text="club.city" onaftersave="updateClub(clubId, club)">{{ club.city }}</a>
+				<a ng-click="deleteClub(clubId)" ng-show="signedIn() && club.owner === currentUser.username">(delete)</a>
+			</div>
+			<div class="info" ng-hide="signedIn()">
+				<a href="#/login">{{ club.name }}</a>
+				<a href="#/login">{{ club.city }}</a>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

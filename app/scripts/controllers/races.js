@@ -58,5 +58,10 @@ app.controller('RacesCtrl', function ($scope, $location, Race) {
 
 	$scope.formats = ['dd-MM-yyyy', 'yyyy/MM/dd', 'shortDate'];
 	$scope.format = $scope.formats[0];
-	
+
+	$scope.hstep = 1;
+	$scope.mstep = 15;
+
+	$scope.ismeridian = false;
+
 });
