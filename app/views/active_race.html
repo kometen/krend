@@ -2,7 +2,28 @@
 	<div class="krend row">
 		<div class="col-md-9 col-xs-11">
 			<tabset>
-				<tab heading="Active Race">Active Race</tab>
+				<tab heading="Active Race">
+					<br />
+					{{ activeRace }}
+					Select active race from Available Races tab<br />
+				</tab>
+				<tab heading="Available Races">
+						<div ng-repeat="(raceId, race) in races">
+							<div class="info form-group" ng-show="signedIn()">
+								<br />
+								{{ race.name }}
+								{{ race.date | date: "dd-MM-yyyy" }}
+								{{ race.location }}
+								<button ng-click="selectRace(raceId, race)" class="btn btn-default">Select Race</button>
+							</div>
+							<div class="info form-group" ng-hide="signedIn()">
+								<br />
+								<a href="#/login">{{ race.name }}</a>
+								<a href="#/login">{{ race.date | date: "dd-MM-yyyy" }}</a>
+								<a href="#/login">{{ race.location }}</a>
+							</div>
+						</div>
+				</tab>
 				<tab ng-repeat="tab in tabs" heading="{{ tab.title }}" active="tab.active" disabled="tab.disabled">
 					{{ tab.content }}
 				</tab>
@@ -14,22 +35,5 @@
 				</tab>
 			</tabset>
 		</div>
-	</div>
-	<div class="krend row" ng-repeat="(clubId, club) in clubs">
-		<div class="col-xs-1">
-		</div>
-		<div class="col-md-9 col-xs-11">
-			<div class="info" ng-show="signedIn()">
-				<a href="#" editable-text="club.name" onaftersave="updateClub(clubId, club)">{{ club.name }}</a>
-				<a href="#" editable-text="club.city" onaftersave="updateClub(clubId, club)">{{ club.city }}</a>
-				<a ng-click="deleteClub(clubId)" ng-show="signedIn() && club.owner === currentUser.username">(delete)</a>
-			</div>
-			<div class="info" ng-hide="signedIn()">
-				<a href="#/login">{{ club.name }}</a>
-				<a href="#/login">{{ club.city }}</a>
-			</div>
-			</div>
-		</div>
-		<div class="col-md-2"></div>
 	</div>
 </div>
