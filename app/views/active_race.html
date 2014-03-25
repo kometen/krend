@@ -4,8 +4,8 @@
 			<tabset>
 				<tab heading="Active Race">
 					<br />
-					{{ activeRace }}
-					Select active race from Available Races tab<br />
+					<span ng-if="activeRace == null">Select active race from Available Races tab</span>
+					<span ng-if="activeRace.name != ''">{{ activeRace.name }}</span>
 				</tab>
 				<tab heading="Available Races">
 						<div ng-repeat="(raceId, race) in races">
@@ -14,7 +14,7 @@
 								{{ race.name }}
 								{{ race.date | date: "dd-MM-yyyy" }}
 								{{ race.location }}
-								<button ng-click="selectRace(raceId, race)" class="btn btn-default">Select Race</button>
+								<button ng-click="setActiveRace(raceId, race)" class="btn btn-default">Select Race</button>
 							</div>
 							<div class="info form-group" ng-hide="signedIn()">
 								<br />
