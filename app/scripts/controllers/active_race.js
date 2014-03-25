@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace) {
+app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace, Participant) {
 
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
@@ -28,6 +28,18 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		setTimeout(function () {
 			$window.alert('You\'ve selected the alert tab!');
 		});
+	};
+
+	$scope.getParticipantNames = function () {
+		var participants = Participant.all;
+		var participantNames = [];
+
+		angular.forEach(participants, function (value) {
+			if (value.name) {
+				participantNames.push(value.name);
+			}
+		});
+		return participantNames;
 	};
 	
 });

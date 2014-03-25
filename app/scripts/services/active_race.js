@@ -27,5 +27,9 @@ app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope, $
 		}
 	};
 
+	$rootScope.$on('$firebaseSimpleLogin:logout', function () {
+		delete $rootScope.activeRace;
+	});
+	
 	return ActiveRace;
 });
