@@ -6,7 +6,8 @@
 					<br />
 					<span ng-if="activeRace == null">Select active race from Available Races tab</span>
 					<span ng-if="activeRace.name != ''">{{ activeRace.name }} {{ activeRace.date }}</span>
-					<form class="navbar-form navbar-left" role="search" ng-submit="addParticipantToRace()" ng-show="signedIn()">
+					<br />
+					<form class="navbar-form" ng-submit="addParticipantToRace()" ng-show="signedIn()">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="participant for participant in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
 						</div>

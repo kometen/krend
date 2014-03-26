@@ -87,3 +87,7 @@ body {
   font-size:11px;
   color:#bbb;
 }
+
+.participant {
+  width: 10000px;
+}
