@@ -2,6 +2,8 @@
 
 app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace, Participant) {
 
+	$scope.participant = {name: ''};
+
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
 		if (!$rootScope.activeRace) {
@@ -17,6 +19,13 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 //		$window.alert('Selected race: ' + race.name + ', raceId: '+ raceId);
 		ActiveRace.setActiveRace(raceId, race);
 		$location.path('/#');
+	};
+
+	$scope.addParticipantToRace = function () {
+//		ActiveRace.addParticipant($scope.participant).then(function  () {
+//		});
+		console.log('raceId:' + $scope.activeRaceId + ', activeRace name: ' + $scope.activeRace.name + ', person name: ' + $scope.participant.name);
+		$scope.participant = {name: ''};
 	};
 
 	$scope.tabs = [
