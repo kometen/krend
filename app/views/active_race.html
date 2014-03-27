@@ -4,15 +4,21 @@
 			<tabset>
 				<tab heading="Active Race">
 					<br />
-					<span ng-if="activeRace == null">Select active race from Available Races tab</span>
-					<span ng-if="activeRace.name != ''">{{ activeRace.name }} {{ activeRace.date }}</span>
-					<br />
-					<form class="navbar-form" ng-submit="addParticipantToRace()" ng-show="signedIn()">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="participant for participant in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
+					<div ng-switch on="!!activeRace">
+						<div ng-switch-when="false">
+							Select active race from Available Races tab
 						</div>
-						<button type="submit" class="btn btn-default">Add Participant</button>
-					</form>
+						<div ng-switch-default>
+							<span ng-if="activeRace.name != ''">{{ activeRace.name }} {{ activeRace.date }}</span>
+							<br />
+							<form class="navbar-form" ng-submit="addParticipantToRace()" ng-show="signedIn()">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="participant for participant in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
+								</div>
+								<button type="submit" class="btn btn-default">Add Participant</button>
+							</form>
+						</div>
+					</div>
 				</tab>
 				<tab heading="Available Races">
 					<div ng-repeat="(raceId, race) in races">
