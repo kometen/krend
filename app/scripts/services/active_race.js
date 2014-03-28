@@ -15,9 +15,6 @@ app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope, $
 				$rootScope.activeRaceId = raceId;
 			}
 		},
-		addParticipant: function  () {
-			console.log('adding participant');
-		},
 		getRace: function () {
 			ref.child('race').on('value', function (snapshot) {
 				console.log('name: ' + snapshot.val().name);

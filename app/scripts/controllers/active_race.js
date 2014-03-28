@@ -6,9 +6,9 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
-		if (!$rootScope.activeRace) {
+/*		if (!$rootScope.activeRace) {
 			$rootScope.activeRace = ActiveRace.getRace();
-		}
+		}*/
 	}
 
 	$scope.currentUser = function () {
@@ -22,9 +22,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	};
 
 	$scope.addParticipantToRace = function () {
-//		ActiveRace.addParticipant($scope.participant).then(function  () {
-//		});
-		console.log('raceId:' + $scope.activeRaceId + ', activeRace name: ' + $scope.activeRace.name + ', person name: ' + $scope.participant.name);
+		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id);
+		Race.addParticipant($scope.activeRaceId, $scope.participant.name);
 		$scope.participant = {name: ''};
 	};
 
@@ -43,12 +42,13 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		var participants = Participant.all;
 		var participantNames = [];
 
-		angular.forEach(participants, function (value) {
+		angular.forEach(participants, function (value, key) {
 			if (value.name) {
-				participantNames.push(value.name);
+				value.id = key;
+				participantNames.push(value);
 			}
 		});
 		return participantNames;
 	};
-	
+
 });

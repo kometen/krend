@@ -39,6 +39,14 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 					});
 				});
 			}
+		},
+		addParticipant: function  (raceId, participant) {
+			if (User.signedIn()) {
+				var user = User.getCurrent();
+
+				participant.owner = user.username;
+				ref.child(raceId).child('participants').child(participant.name).setWithPriority(participant, new Date().getTime());
+			}
 		}
 	};
 	
