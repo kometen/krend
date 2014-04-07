@@ -1,12 +1,17 @@
 'use strict';
 
-app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace, Participant) {
+app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace, Participant, FIREBASE_URL) {
 
 	$scope.participant = {name: ''};
 
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
 		$rootScope.activeRace = ActiveRace.getActiveRace;
+		var fb = new Firebase(FIREBASE_URL);
+		fb.child('active_race/raceId').once('value', function (activeSnap) {
+			$rootScope.activeRaceId = activeSnap.val();
+		});
+
 		ActiveRace.getRaceId();
 	}
 
@@ -25,7 +30,7 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 
 	$scope.addParticipantToRace = function () {
 		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id);
-		Race.addParticipant($scope.activeRaceId, $scope.participant.name);
+		Race.addParticipant($rootScope.activeRaceId, $scope.participant.name);
 		$scope.participant = {name: ''};
 	};
 
