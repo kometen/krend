@@ -6,10 +6,12 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
-/*		if (!$rootScope.activeRace) {
-			$rootScope.activeRace = ActiveRace.getRace();
-		}*/
+		$rootScope.activeRace = ActiveRace.getActiveRace;
+		ActiveRace.getRaceId();
 	}
+
+//	$scope.participantsInRace = [{name: 'Claus', born: '1967'}, {name: 'Eline', born: '2000'}];
+	Race.getParticipantsInRace();
 
 	$scope.currentUser = function () {
 		User.getCurrent();

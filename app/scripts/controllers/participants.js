@@ -19,8 +19,6 @@ app.controller('ParticipantsCtrl', function ($scope, $location, Participant, Clu
 		Participant.delete(participantId);
 	};
 
-	$scope.clubs = ['BBIL', 'STIL', 'Vikane IL', 'GFIL'];
-
 	$scope.getClubNames = function () {
 		var clubs = Club.all;
 		var clubNames = [];
