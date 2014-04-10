@@ -15,7 +15,6 @@ app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope) {
 				ar.$child('race').$set(race);
 
 				$rootScope.activeRace = race;
-				$rootScope.activeRaceId = raceId;
 			}
 		},
 		getRace: function () {
@@ -25,13 +24,15 @@ app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope) {
 			});
 		},
 		getRaceId: function () {
-/*			var fb = new Firebase(FIREBASE_URL);
-			fb.child('active_race/raceId').once('value', function (activeSnap) {
-				fb.child('races/' + activeSnap.val() + '/owner').once('value', function (ownerSnap) {
-					console.log('activeSnap: ' + activeSnap.val() + ', ownerSnap: ' + ownerSnap.val());
-				});
-			});*/
-			return ar.$child('raceId');
+			ref.child('raceId').once('value', function (activeSnap) {
+				console.log('getRaceId: ' + activeSnap.val());
+				return activeSnap.val();
+			});
+		},
+		updateParticipant: function (participantId, participant, raceId) {
+			if (User.signedIn()) {
+				ar.$child(raceId).$child('participants').$child(participantId).$update(participant);
+			}
 		}
 	};
 

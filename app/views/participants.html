@@ -26,9 +26,7 @@
 				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
 			</div>
 			<div class="info" ng-hide="signedIn()">
-				<a href="#/login">{{ participant.name }}</a>
-				<a href="#/login">{{ participant.born }}</a>
-				<a href="#/login">{{ participant.club }}</a>
+				<a href="#/login">{{ participant.name }} {{ participant.born }} {{ participant.club }}</a>
 			</div>
 			</div>
 		</div>

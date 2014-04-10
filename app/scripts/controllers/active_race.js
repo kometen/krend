@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, ActiveRace, Participant, FIREBASE_URL) {
+app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, ActiveRace, Participant, FIREBASE_URL) {
 
 	$scope.participant = {name: ''};
 
@@ -9,18 +9,9 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		$rootScope.activeRace = ActiveRace.getActiveRace;
 		var fb = new Firebase(FIREBASE_URL);
 		fb.child('active_race/raceId').once('value', function (activeSnap) {
-			$rootScope.activeRaceId = activeSnap.val();
+			$rootScope.participantsInRace = Race.getParticipantsInRace(activeSnap.val());
 		});
-
-		ActiveRace.getRaceId();
 	}
-
-//	$scope.participantsInRace = [{name: 'Claus', born: '1967'}, {name: 'Eline', born: '2000'}];
-	Race.getParticipantsInRace();
-
-	$scope.currentUser = function () {
-		User.getCurrent();
-	};
 
 	$scope.setActiveRace = function (raceId, race) {
 //		$window.alert('Selected race: ' + race.name + ', raceId: '+ raceId);
@@ -29,9 +20,17 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	};
 
 	$scope.addParticipantToRace = function () {
-		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id);
+		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id + ', activeRaceId: ' + $rootScope.activeRace.raceId);
 		Race.addParticipant($rootScope.activeRaceId, $scope.participant.name);
 		$scope.participant = {name: ''};
+	};
+
+	$scope.updateParticipant = function (participantId, participant, raceId) {
+		Race.updateParticipant(participantId, participant, raceId);
+	};
+
+	$scope.deleteParticipant = function (participantId, raceId) {
+		Race.deleteParticipant(participantId, raceId);
 	};
 
 	$scope.tabs = [

@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Race', function ($firebase, FIREBASE_URL, User, $rootScope) {
+app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 	var ref = new Firebase(FIREBASE_URL + 'races');
 	var races = $firebase(ref);
 	var Race = {
@@ -48,15 +48,20 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User, $rootScope) {
 				ref.child(raceId).child('participants').child(participant.id).setWithPriority(participant, new Date().getTime());
 			}
 		},
-		getParticipantsInRace: function () {
-//			return [{name: 'Claus', born: '1967'}, {name: 'Eline', born: '2000'}];
+		getParticipantsInRace: function (raceId) {
 //			if (User.signedIn()) {}
-			var fb = new Firebase(FIREBASE_URL);
-			fb.child('active_race/raceId').once('value', function (activeSnap) {
-				$rootScope.participantsInRace = races.$child('/' + activeSnap.val() + '/participants');
-			});
+			console.log('raceId: ' + raceId);
+			return races.$child('/' + raceId + '/participants');
+//			return [{name: 'Claus', born: '1967'}, {name: 'Eline', born: '2000'}];
+		},
+		updateParticipant: function (participantId, participant, raceId) {
+			console.log('update participant named ' + participant.name + ', raceId: ' + raceId);
+		},
+		deleteParticipant: function (participantId, raceId) {
+			console.log('delete participant: ' + participantId + ', raceId: ' + raceId);
+			races.$child(raceId).$child('participants').$remove(participantId);
 		}
 	};
-	
+
 	return Race;
 });

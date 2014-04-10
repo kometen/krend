@@ -9,7 +9,7 @@
 							Select active race from Available Races tab
 						</div>
 						<div ng-switch-default>
-							{{ activeRace }}
+							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date }}
 							<br />
 							<form class="navbar-form" ng-submit="addParticipantToRace()" ng-show="signedIn()">
 								<div class="form-group">
@@ -17,8 +17,20 @@
 								</div>
 								<button type="submit" class="btn btn-default">Add Participant</button>
 							</form>
-							<div ng-repeat="(pId, p) in participantsInRace">
-								{{ p.name }} {{ p.born }} pId: {{ pId + 1 }}
+							<div ng-repeat="(participantId, participant) in participantsInRace">
+								<div class="info" ng-show="signedIn()">
+									{{ $index + 1 }}, 
+									<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
+									<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
+									<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>
+									<a ng-click="deleteParticipant(participantId, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
+								</div>
+							</div>
+							<div class="info" ng-hide="signedIn()">
+								<div ng-repeat="(participantId, participant) in participantsInRace">
+									{{ $index + 1 }},
+									<a href="#/login">{{ participant.name }}, født {{ participant.born }}</a>
+								</div>
 							</div>
 						</div>
 					</div>
