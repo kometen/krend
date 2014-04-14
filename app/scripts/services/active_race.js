@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope) {
+app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope, Race) {
 	var ref = new Firebase(FIREBASE_URL + 'active_race');
 	var ar = $firebase(ref);
 	var ActiveRace = {
@@ -15,6 +15,7 @@ app.factory('ActiveRace', function ($firebase, FIREBASE_URL, User, $rootScope) {
 				ar.$child('race').$set(race);
 
 				$rootScope.activeRace = race;
+				$rootScope.participantsInRace = Race.getParticipantsInRace(raceId);
 			}
 		},
 		getRace: function () {

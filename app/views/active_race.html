@@ -11,7 +11,7 @@
 						<div ng-switch-default>
 							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date }}
 							<br />
-							<form class="navbar-form" ng-submit="addParticipantToRace()" ng-show="signedIn()">
+							<form class="navbar-form" ng-submit="addParticipantToRace(activeRace.raceId)" ng-show="signedIn()">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="n as n.name for n in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
 								</div>

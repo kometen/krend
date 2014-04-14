@@ -27,7 +27,34 @@ app.factory('User', function ($firebase, $rootScope, FIREBASE_URL) {
 		},
 		signedIn: function () {
 			return $rootScope.currentUser !== undefined;
-		}
+		},
+		// active race
+		setActiveRace: function (raceId, race) {
+			if (User.signedIn()) {
+				console.log('setActiveRace: ' + raceId);
+				var user = User.getCurrent();
+				
+				race.owner = user.username;
+				race.participants = null;
+				users.$child(user.username).$child('activeRace').$child('raceId').$set(raceId);
+				users.$child(user.username).$child('activeRace').$child('race').$set(race);
+			}
+		},
+		getActiveRace: function () {
+			if (User.signedIn()) {
+				var user = User.getCurrent();
+				console.log('user: ' + user.username);
+
+				return users.$child(user.username).$child('activeRace');
+			}
+		},
+		getActiveRaceId: function () {
+			if (User.signedIn()) {
+				var user = User.getCurrent();
+
+				return users.$child(user.username).$child('activeRace').$child('raceId');
+			}
+		},
 	};
 	
 	function setCurrentUser (username) {

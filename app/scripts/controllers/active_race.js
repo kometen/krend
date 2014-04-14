@@ -1,36 +1,33 @@
 'use strict';
 
-app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, ActiveRace, Participant, FIREBASE_URL) {
+app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $window, Race, User, Participant) {
 
 	$scope.participant = {name: ''};
 
 	if ($location.path() === '/') {
 		$scope.races = Race.all;
-		$rootScope.activeRace = ActiveRace.getActiveRace;
-		var fb = new Firebase(FIREBASE_URL);
-		fb.child('active_race/raceId').once('value', function (activeSnap) {
-			$rootScope.participantsInRace = Race.getParticipantsInRace(activeSnap.val());
-		});
+		$scope.activeRace = User.getActiveRace();
+		$scope.participantsInRace = Race.getParticipantsInRace();
 	}
 
 	$scope.setActiveRace = function (raceId, race) {
 //		$window.alert('Selected race: ' + race.name + ', raceId: '+ raceId);
-		ActiveRace.setActiveRace(raceId, race);
+		User.setActiveRace(raceId, race);
 		$location.path('/#');
 	};
 
-	$scope.addParticipantToRace = function () {
-		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id + ', activeRaceId: ' + $rootScope.activeRace.raceId);
-		Race.addParticipant($rootScope.activeRaceId, $scope.participant.name);
+	$scope.addParticipantToRace = function (activeRaceId) {
+		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id);
+		User.addParticipantToRace(activeRaceId, $scope.participant.name);
 		$scope.participant = {name: ''};
 	};
 
 	$scope.updateParticipant = function (participantId, participant, raceId) {
-		Race.updateParticipant(participantId, participant, raceId);
+		User.updateParticipant(participantId, participant, raceId);
 	};
 
 	$scope.deleteParticipant = function (participantId, raceId) {
-		Race.deleteParticipant(participantId, raceId);
+		User.deleteParticipant(participantId, raceId);
 	};
 
 	$scope.tabs = [
