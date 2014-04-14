@@ -54,8 +54,8 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 			if (User.signedIn()) {
 				var user = User.getCurrent();
 
-				participant.owner = user.username;
-				ref.child(user.username).child(raceId).child('participants').child(participant.id).setWithPriority(participant, new Date().getTime());
+				console.log('name: ' + participant.name + ', born: ' + participant.name.born + ', id: ' + participant.name.id + ', user: ' + user.username);
+				ref.child(raceId).child('participants').child(participant.id).setWithPriority(participant, new Date().getTime());
 			}
 		},
 		getParticipantsInRace: function () {

@@ -18,7 +18,7 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 
 	$scope.addParticipantToRace = function (activeRaceId) {
 		console.log('name: ' + $scope.participant.name.name + ', born: ' + $scope.participant.name.born + ', id: ' + $scope.participant.name.id);
-		User.addParticipantToRace(activeRaceId, $scope.participant.name);
+		Race.addParticipantToRace(activeRaceId, $scope.participant.name);
 		$scope.participant = {name: ''};
 	};
 
