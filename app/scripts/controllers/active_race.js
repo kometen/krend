@@ -26,8 +26,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		User.updateParticipant(participantId, participant, raceId);
 	};
 
-	$scope.deleteParticipant = function (participantId, raceId) {
-		User.deleteParticipant(participantId, raceId);
+	$scope.deleteParticipantInRace = function (participantId, raceId) {
+		Race.deleteParticipantInRace(participantId, raceId);
 	};
 
 	$scope.tabs = [

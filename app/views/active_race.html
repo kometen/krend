@@ -9,7 +9,7 @@
 							Select active race from Available Races tab
 						</div>
 						<div ng-switch-default>
-							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date }}
+							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date | date: "dd-MM-yyyy" }}
 							<br />
 							<form class="navbar-form" ng-submit="addParticipantToRace(activeRace.raceId)" ng-show="signedIn()">
 								<div class="form-group">
@@ -17,13 +17,13 @@
 								</div>
 								<button type="submit" class="btn btn-default">Add Participant</button>
 							</form>
-							<div ng-repeat="(participantId, participant) in participantsInRace">
+							<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
 								<div class="info" ng-show="signedIn()">
-									{{ $index + 1 }}, 
+									{{ $index + 1 }},
 									<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
 									<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
 									<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>
-									<a ng-click="deleteParticipant(participantId, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
+									<a ng-click="deleteParticipantInRace(participant.id, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
 								</div>
 							</div>
 							<div class="info" ng-hide="signedIn()">
@@ -46,9 +46,7 @@
 						</div>
 						<div class="info form-group" ng-hide="signedIn()">
 							<br />
-							<a href="#/login">{{ race.name }}</a>
-							<a href="#/login">{{ race.date | date: "dd-MM-yyyy" }}</a>
-							<a href="#/login">{{ race.location }}</a>
+							<a href="#/login">{{ race.name }} {{ race.date | date: "dd-MM-yyyy" }} {{ race.location }}</a>
 						</div>
 					</div>
 				</tab>

@@ -15,9 +15,8 @@
 		</form>
 		</div>
 	</div>
-	<div class="krend row" ng-repeat="(participantId, participant) in participants">
-		<div class="col-xs-1">
-		</div>
+	<div class="krend row" ng-repeat="(participantId, participant) in participants" ng-show="signedIn()">
+		<div class="col-xs-1"></div>
 		<div class="col-md-9 col-xs-11">
 			<div class="info" ng-show="signedIn()">
 				<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant)">{{ participant.name }}</a>
@@ -25,11 +24,7 @@
 				<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant)">{{ participant.club }}</a>
 				<a ng-click="deleteParticipant(participantId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
 			</div>
-			<div class="info" ng-hide="signedIn()">
-				<a href="#/login">{{ participant.name }} {{ participant.born }} {{ participant.club }}</a>
-			</div>
-			</div>
 		</div>
-		<div class="col-md-2"></div>
 	</div>
+	<div class="col-md-2"></div>
 </div>

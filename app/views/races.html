@@ -14,6 +14,12 @@
 				</p>
 			</div>
 			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Time" ng-model="race.time">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Interval" ng-model="race.interval">
+			</div>
+			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Location" ng-model="race.location">
 			</div>
 			<button type="submit" class="btn btn-default">Add Race</button>
@@ -28,6 +34,8 @@
 				<a href="#" editable-text="race.name" onaftersave="updateRace(raceId, race)">{{ race.name }}</a>
 				<a href="#" editable-bsdate="race.date" e-datepicker-popup="dd-MM-yyyy" onaftersave="updateRace(raceId, race)">{{ race.date | date: "dd-MM-yyyy" }}</a>
 				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
+				<a href="#" editable-text="race.time" onaftersave="updateRace(raceId, race)">{{ race.time }}</a>
+				<a href="#" editable-text="race.interval" onaftersave="updateRace(raceId, race)">{{ race.interval }}</a>
 				<a ng-click="deleteRace(raceId)" ng-show="signedIn() && race.owner === currentUser.username">(delete)</a>
 			</div>
 			<div class="info" ng-hide="signedIn()">
