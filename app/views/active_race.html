@@ -19,17 +19,11 @@
 							</form>
 							<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
 								<div class="info" ng-show="signedIn()">
-									{{ $index + 1 }},
+									{{ $index + 1 }}, {{ participant.time + ($index * 15) }},
 									<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
 									<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
 									<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>
 									<a ng-click="deleteParticipantInRace(participant.id, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
-								</div>
-							</div>
-							<div class="info" ng-hide="signedIn()">
-								<div ng-repeat="(participantId, participant) in participantsInRace">
-									{{ $index + 1 }},
-									<a href="#/login">{{ participant.name }}, født {{ participant.born }}</a>
 								</div>
 							</div>
 						</div>

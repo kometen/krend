@@ -7,7 +7,8 @@ var app = angular.module('krendApp', [
   'ngRoute',
   'xeditable',
   'ui.bootstrap',
-  'firebase'
+  'firebase',
+  'angular-momentjs'
 ]);
 
 //app.run(function(editableOptions){

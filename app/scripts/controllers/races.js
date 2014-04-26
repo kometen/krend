@@ -1,11 +1,12 @@
 'use strict';
 
-app.controller('RacesCtrl', function ($scope, $location, Race) {
+app.controller('RacesCtrl', function ($scope, $location, Race, $moment) {
 	if ($location.path() === '/races') {
 		$scope.races = Race.all;
 	}
 	
 	$scope.submitRace = function () {
+		console.log('time: ' + $moment($scope.race.time));
 		Race.create($scope.race).then(function () {
 			$scope.race = {name: '', date: '', location: ''};
 		});
