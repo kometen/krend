@@ -8,7 +8,7 @@ app.controller('RacesCtrl', function ($scope, $location, Race, $moment) {
 	$scope.submitRace = function () {
 		console.log('time: ' + $moment($scope.race.time));
 		Race.create($scope.race).then(function () {
-			$scope.race = {name: '', date: '', location: ''};
+			$scope.race = {name: '', date: '', time: '', interval: '', location: ''};
 		});
 	};
 
@@ -35,16 +35,6 @@ app.controller('RacesCtrl', function ($scope, $location, Race, $moment) {
 		$scope.dt = null;
 	};
 
-	// Disable weekend selection
-	$scope.disabled = function(date, mode) {
-		return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-	};
-
-	$scope.toggleMin = function() {
-		$scope.minDate = ( $scope.minDate ) ? null : new Date();
-	};
-	$scope.toggleMin();
-
 	$scope.open = function($event) {
 		$event.preventDefault();
 		$event.stopPropagation();
@@ -56,13 +46,5 @@ app.controller('RacesCtrl', function ($scope, $location, Race, $moment) {
 		'year-format': 'yy',
 		'starting-day': 1
 	};
-
-	$scope.formats = ['dd-MM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-	$scope.format = $scope.formats[0];
-
-	$scope.hstep = 1;
-	$scope.mstep = 15;
-
-	$scope.ismeridian = false;
 
 });

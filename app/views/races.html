@@ -3,19 +3,14 @@
 		<div class="col-md-9 col-xs-11">
 		<form class="navbar-form navbar-left" role="search" ng-submit="submitRace()" ng-show="signedIn()">
 			<div class="form-group">
-				<p><input type="text" class="form-control" placeholder="Name" ng-model="race.name"></p>
+				<input type="text" class="form-control" placeholder="Name" ng-model="race.name">
 			</div>
-			<div class="form-group">
-				<p class="input-group">
-					<input type="text" class="form-control" placeholder="Date" datepicker-popup="{{ format }}" ng-model="race.date" is-open="opened" min="minDate" max="'2020-12-32'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-					</span>
-				</p>
-			</div>
-			<div class="form-group" ng-class="{'has-error': timepickerForm.time2.$invalid}">
-				<input type="text" class="form-control" placeholder="HH:MM" ng-model="race.time" data-time-format="HH:mm" data-time-type="number" data-autoclose="1" name="time2" bs-timepicker size="5">
-			</div>
+		    <div class="form-group">
+      			<input size="10" class="form-control" ng-model="race.date" data-autoclose="1" placeholder="Date" bs-datepicker type="text">
+		    </div>
+		    <div class="form-group">
+      			<input size="5" data-time-format="HH:mm" data-time-type="number" class="form-control" ng-model="race.time" data-autoclose="1" placeholder="Time" bs-timepicker type="text">
+		    </div>
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Interval" ng-model="race.interval">
 			</div>
@@ -33,9 +28,9 @@
 			<div class="info" ng-show="signedIn()">
 				<a href="#" editable-text="race.name" onaftersave="updateRace(raceId, race)">{{ race.name }}</a>
 				<a href="#" editable-bsdate="race.date" e-datepicker-popup="dd-MM-yyyy" onaftersave="updateRace(raceId, race)">{{ race.date | date: "dd-MM-yyyy" }}</a>
-				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
-				<a href="#" editable-text="race.time" onaftersave="updateRace(raceId, race)">{{ race.time }}</a>
+				<a href="#" editable-text="race.time" onaftersave="updateRace(raceId, race)">{{ race.time | date: "hh:mm" }}</a>
 				<a href="#" editable-text="race.interval" onaftersave="updateRace(raceId, race)">{{ race.interval }}</a>
+				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
 				<a ng-click="deleteRace(raceId)" ng-show="signedIn() && race.owner === currentUser.username">(delete)</a>
 			</div>
 			<div class="info" ng-hide="signedIn()">
