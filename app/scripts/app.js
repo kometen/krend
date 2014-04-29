@@ -8,7 +8,8 @@ var app = angular.module('krendApp', [
   'xeditable',
   'ui.bootstrap',
   'firebase',
-  'angular-momentjs'
+  'angular-momentjs',
+  'mgcrea.ngStrap'
 ]);
 
 //app.run(function(editableOptions){
