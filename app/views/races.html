@@ -28,7 +28,7 @@
 			<div class="info" ng-show="signedIn()">
 				<a href="#" editable-text="race.name" onaftersave="updateRace(raceId, race)">{{ race.name }}</a>
 				<a href="#" editable-bsdate="race.date" e-datepicker-popup="dd-MM-yyyy" onaftersave="updateRace(raceId, race)">{{ race.date | date: "dd-MM-yyyy" }}</a>
-				<a href="#" editable-text="race.time" onaftersave="updateRace(raceId, race)">{{ race.time | date: "hh:mm" }}</a>
+				<a href="#" editable-text="race.time" onaftersave="updateRace(raceId, race)">{{ race.time | date: "HH:mm" }}</a>
 				<a href="#" editable-text="race.interval" onaftersave="updateRace(raceId, race)">{{ race.interval }}</a>
 				<a href="#" editable-text="race.location" onaftersave="updateRace(raceId, race)">{{ race.location }}</a>
 				<a ng-click="deleteRace(raceId)" ng-show="signedIn() && race.owner === currentUser.username">(delete)</a>

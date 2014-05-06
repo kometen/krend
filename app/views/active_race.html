@@ -9,8 +9,11 @@
 							Select active race from Available Races tab
 						</div>
 						<div ng-switch-default>
-							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date | date: "dd-MM-yyyy" }} {{ activeRace.race.time }}
+							raceId: {{ activeRace.raceId }} Løb: {{ activeRace.race.name }} {{ activeRace.race.location }} {{ activeRace.race.date | date: "dd-MM-yyyy" }} {{ activeRace.race.time }} {{ activeRace.race.locked }}
 							<br />
+							<form class="navbar-form" ng-submit="toggleLockStatusRace(activeRace.raceId)" ng-show="signedIn()">
+								<button type="submit" class="btn btn-default">{{ raceLockedMsg }}</button>
+							</form>
 							<form class="navbar-form" ng-submit="addParticipantToRace(activeRace.raceId)" ng-show="signedIn()">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="n as n.name for n in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
@@ -19,7 +22,7 @@
 							</form>
 							<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
 								<div class="info" ng-show="signedIn()">
-									{{ $index + 1 }}, {{  activeRace.race.time + ($index * 15000) | date: "hh:mm:ss" }},
+									{{ $index + 1 }}, {{  activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
 									<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
 									<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
 									<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>

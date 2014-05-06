@@ -5,6 +5,10 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	$scope.participant = {name: ''};
 
 	if ($location.path() === '/') {
+		if (angular.isUndefined($scope.lockRaceStatus)) {
+			$scope.raceLocked = false;
+			$scope.raceLockedMsg = 'Lock Race';
+		}
 		$scope.races = Race.all;
 		$scope.activeRace = User.getActiveRace();
 		$scope.participantsInRace = Race.getParticipantsInRace();
@@ -29,6 +33,21 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	$scope.deleteParticipantInRace = function (participantId, raceId) {
 		Race.deleteParticipantInRace(participantId, raceId);
 	};
+
+	$scope.toggleLockStatusRace = function (raceId) {
+		var msg = '';
+		if ($scope.raceLocked === false) {
+			$scope.raceLocked = true;
+			$scope.raceLockedMsg = 'Unlock Race';
+			msg = 'locked';
+		} else {
+			$scope.raceLocked = false;
+			$scope.raceLockedMsg = 'Lock Race';
+			msg = 'unlocked';
+		}
+		console.log(msg + ' race with id ' + raceId);
+	};
+
 
 	$scope.tabs = [
 		{ title: 'Available Races', content: 'Set active race from the list below'},
