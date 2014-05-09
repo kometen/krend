@@ -14,12 +14,26 @@
 							<form class="navbar-form" ng-submit="toggleLockStatusRace(activeRace.raceId)" ng-show="signedIn()">
 								<button type="submit" class="btn btn-default">{{ raceLockedMsg }}</button>
 							</form>
-							<form class="navbar-form" ng-submit="addParticipantToRace(activeRace.raceId)" ng-show="signedIn()">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="n as n.name for n in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
+							<div ng-switch on="!!raceLockedStatus">
+								<div ng-switch-when="false">
+									You can edit participant list
+									<form class="navbar-form" ng-submit="addParticipantToRace(activeRace.raceId)" ng-show="signedIn()">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Participant" ng-model="participant.name" typeahead="n as n.name for n in getParticipantNames($viewValue) | filter:$viewValue" typeahead-loading="loadingParticipants">
+										</div>
+										<button type="submit" class="btn btn-default">Add Participant</button>
+									</form>
 								</div>
-								<button type="submit" class="btn btn-default">Add Participant</button>
-							</form>
+								<div ng-switch-default>
+									Race is locked
+									<form class="navbar-form" ng-submit="registerParticipantsRaceTime(activeRace.raceId)" ng-show="signedIn()">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Start Number" ng-model="participant.startnumber">
+										</div>
+										<button type="submit" class="btn btn-default">Register Race Time</button>
+									</form>
+								</div>
+							</div>
 							<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
 								<div class="info" ng-show="signedIn()">
 									{{ $index + 1 }}, {{  activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},

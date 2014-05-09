@@ -5,8 +5,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	$scope.participant = {name: ''};
 
 	if ($location.path() === '/') {
-		if (angular.isUndefined($scope.lockRaceStatus)) {
-			$scope.raceLocked = false;
+		if (angular.isUndefined($scope.raceLockedStatus)) {
+			$scope.raceLockedStatus = false;
 			$scope.raceLockedMsg = 'Lock Race';
 		}
 		$scope.races = Race.all;
@@ -36,12 +36,12 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 
 	$scope.toggleLockStatusRace = function (raceId) {
 		var msg = '';
-		if ($scope.raceLocked === false) {
-			$scope.raceLocked = true;
+		if ($scope.raceLockedStatus === false) {
+			$scope.raceLockedStatus = true;
 			$scope.raceLockedMsg = 'Unlock Race';
 			msg = 'locked';
 		} else {
-			$scope.raceLocked = false;
+			$scope.raceLockedStatus = false;
 			$scope.raceLockedMsg = 'Lock Race';
 			msg = 'unlocked';
 		}
