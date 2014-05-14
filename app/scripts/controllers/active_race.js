@@ -40,6 +40,11 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 			$scope.raceLockedStatus = true;
 			$scope.raceLockedMsg = 'Unlock Race';
 			msg = 'locked';
+			// stackoverflow.com/questions/22135196/how-do-i-loop-through-the-children-of-a-firebase-instance
+			var keys = $scope.participantsInRace.$getIndex();
+			angular.forEach(keys, function(key)	{
+				console.log('participant: ' + key, $scope.participantsInRace[key].name);
+			});
 		} else {
 			$scope.raceLockedStatus = false;
 			$scope.raceLockedMsg = 'Lock Race';
