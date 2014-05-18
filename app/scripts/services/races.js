@@ -73,6 +73,9 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 		updateParticipant: function (participantId, participant, raceId) {
 			console.log('update participant named ' + participant.name + ', raceId: ' + raceId);
 		},
+		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber) {
+			console.log('update participant with startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber);
+		},
 		deleteParticipantInRace: function (participantId, raceId) {
 			console.log('delete participant: ' + participantId + ', raceId: ' + raceId);
 			races.$child(raceId).$child('participants').$remove(participantId);
