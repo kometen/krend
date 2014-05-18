@@ -23,6 +23,15 @@
 										</div>
 										<button type="submit" class="btn btn-default">Add Participant</button>
 									</form>
+									<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
+										<div class="info" ng-show="signedIn()">
+											{{ $index + 1 }}, {{  activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
+											<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
+											<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
+											<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>
+											<a ng-click="deleteParticipantInRace(participant.id, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
+										</div>
+									</div>
 								</div>
 								<div ng-switch-default>
 									Race is locked
@@ -33,15 +42,17 @@
 										</div>
 										<button type="submit" class="btn btn-default">Register Race Time</button>
 									</form>
-								</div>
-							</div>
-							<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
-								<div class="info" ng-show="signedIn()">
-									{{ $index + 1 }}, {{  activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
-									<a href="#" editable-text="participant.name" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.name }}</a>
-									<a href="#" editable-text="participant.born" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.born }}</a>
-									<a href="#" editable-text="participant.club" e-typeahead="club for club in getClubNames($viewValue) | filter:$viewValue" onaftersave="updateParticipant(participantId, participant, activeRace.raceId)">{{ participant.club }}</a>
-									<a ng-click="deleteParticipantInRace(participant.id, activeRace.raceId)" ng-show="signedIn() && participant.owner === currentUser.username">(delete)</a>
+									<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
+										<div class="info" ng-show="signedIn()">
+											{{ $index + 1 }},
+											{{ activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
+											{{ activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
+											{{ (activeRace.race.time + ($index * 15000)) - (activeRace.race.time + ($index * 15000)) | date: "mm:ss" }},
+											{{ participant.name }},
+											{{ participant.born }},
+											{{ participant.club }}
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -42,8 +42,12 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 			msg = 'locked';
 			// stackoverflow.com/questions/22135196/how-do-i-loop-through-the-children-of-a-firebase-instance
 			var keys = $scope.participantsInRace.$getIndex();
+			var i = 1;
+			$scope.startId = {};
 			angular.forEach(keys, function(key)	{
-				console.log('participant: ' + key, $scope.participantsInRace[key].name);
+				console.log('participant: ' + key, $scope.participantsInRace[key].name + ', startnr: ' + i);
+				$scope.startId[i] = key;
+				i++;
 			});
 		} else {
 			$scope.raceLockedStatus = false;
@@ -53,6 +57,9 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		console.log(msg + ' race with id ' + raceId);
 	};
 
+	$scope.registerParticipantsRaceTime = function(raceId) {
+		console.log('startnr: ' + $scope.participant.startnumber + ', starttidspunkt: ' + ($scope.activeRace.race.time + (($scope.participant.startnumber - 1) * 15000)) + ', id: ' + $scope.startId[$scope.participant.startnumber] + ', raceId: ' + raceId);
+	};
 
 	$scope.tabs = [
 		{ title: 'Available Races', content: 'Set active race from the list below'},
