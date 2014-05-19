@@ -45,8 +45,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 			var i = 1;
 			$scope.startId = {};
 			angular.forEach(keys, function(key)	{
-				Race.updateParticipantWithStartNumberAndTime(raceId, key, i);	// raceId, participantId, startnumber
-//				console.log('participant: ' + key, $scope.participantsInRace[key].name + ', startnr: ' + i);
+				Race.updateParticipantWithStartNumberAndTime(raceId, key, i, $scope.activeRace.race.time);	// raceId, participantId, startnumber, time
+//				console.log('racestart: ' + $scope.activeRace.race.time);
 				$scope.startId[i] = key;
 				i++;
 			});

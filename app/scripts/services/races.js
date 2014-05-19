@@ -64,8 +64,6 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 					console.log('pRef: ' + FIREBASE_URL + 'races/' + userSnap.val() + '/participants');
 					console.log('activeRaceId: ' + userSnap.val());
 					t = races.$child(userSnap.val()).$child('participants');
-//					t = races.$child('-JIecmbdDa4kUT2L51iS').$child('participants');
-//					t = [{name: 'Claus', born: 1967, club: 'BBIL'}];
 				});
 				return t;
 			}
@@ -73,8 +71,9 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 		updateParticipant: function (participantId, participant, raceId) {
 			console.log('update participant named ' + participant.name + ', raceId: ' + raceId);
 		},
-		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber) {
-			console.log('update participant with startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber);
+		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber, time) {
+			console.log('update startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber + ', racestart: ' + time);
+			races.$child(raceId).$child('participants').$child(participantId).$update({ startnumber : startnumber, starttime : ((startnumber - 1) * 15000 + time) });
 		},
 		deleteParticipantInRace: function (participantId, raceId) {
 			console.log('delete participant: ' + participantId + ', raceId: ' + raceId);

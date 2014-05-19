@@ -45,8 +45,8 @@
 									<div ng-repeat="(participantId, participant) in participantsInRace | orderByPriority ">
 										<div class="info" ng-show="signedIn()">
 											{{ $index + 1 }},
-											{{ activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
-											{{ activeRace.race.time + ($index * 15000) | date: "HH:mm:ss" }},
+											{{ participant.starttime | date: "HH:mm:ss" }},
+											{{ participant.endtime | date: "HH:mm:ss" }},
 											{{ (activeRace.race.time + ($index * 15000)) - (activeRace.race.time + ($index * 15000)) | date: "mm:ss" }},
 											{{ participant.name }},
 											{{ participant.born }},
