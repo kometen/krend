@@ -71,9 +71,9 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 		updateParticipant: function (participantId, participant, raceId) {
 			console.log('update participant named ' + participant.name + ', raceId: ' + raceId);
 		},
-		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber, time) {
-			console.log('update startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber + ', participant starttime: ' + ((startnumber - 1) * 15000 + time));
-			races.$child(raceId).$child('participants').$child(participantId).$update({ startnumber : startnumber, starttime : ((startnumber - 1) * 15000 + time) });
+		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber, time, interval) {
+			console.log('update startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber + ', participant starttime: ' + ((startnumber - 1) * 15000 + time) + ', interval: ' + interval);
+			races.$child(raceId).$child('participants').$child(participantId).$update({ startnumber : startnumber, starttime : ((startnumber - 1) * interval * 1000 + time) });
 		},
 		updateParticipantWithEndtime: function(raceId, participantId, endtime) {
 			races.$child(raceId).$child('participants').$child(participantId).$update({ endtime : endtime });
