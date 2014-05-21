@@ -59,7 +59,15 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	};
 
 	$scope.registerParticipantsRaceTime = function(raceId) {
-		console.log('startnr: ' + $scope.participant.startnumber + ', starttidspunkt: ' + ($scope.activeRace.race.time + (($scope.participant.startnumber - 1) * 15000)) + ', id: ' + $scope.startId[$scope.participant.startnumber] + ', raceId: ' + raceId);
+		var startnr = $scope.participant.startnumber;
+		var start = $scope.activeRace.race.time + (($scope.participant.startnumber - 1) * $scope.activeRace.race.interval * 1000);
+		var hour = parseInt($scope.participant.endtime.substr(0,2));
+		var minute = parseInt($scope.participant.endtime.substr(2,2));
+		var second = parseInt($scope.participant.endtime.substr(4,2));
+		var end = ((hour - 1) * 3600 + minute * 60 + second) * 1000;
+		var id = $scope.startId[$scope.participant.startnumber];
+		Race.updateParticipantWithEndtime(raceId, id, end);	// raceId, participantId, startnumber, time
+		console.log('startnr: ' + startnr + ', start: ' + start + ', end: ' + end + ', id: ' + id + ', raceId: ' + raceId);
 	};
 
 	$scope.tabs = [

@@ -47,7 +47,7 @@
 											{{ $index + 1 }},
 											{{ participant.starttime | date: "HH:mm:ss" }},
 											{{ participant.endtime | date: "HH:mm:ss" }},
-											{{ (activeRace.race.time + ($index * 15000)) - (activeRace.race.time + ($index * 15000)) | date: "mm:ss" }},
+											{{ participant.endtime - participant.starttime | date: "mm:ss" }},
 											{{ participant.name }},
 											{{ participant.born }},
 											{{ participant.club }}
