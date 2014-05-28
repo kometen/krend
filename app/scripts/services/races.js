@@ -40,14 +40,18 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 				});
 			}
 		},
+		// Set whether race is locked for updates or not
+		setRaceLockedStatus: function (raceId, race) {
+			if (User.signedIn()) {
+				console.log('set racelockstatus to ' + race.locked + ' for raceId ' + raceId);
+				races.$child(raceId).$update(race);
+			}
+		},
 		// participants in race
 		updateActiveRaceParticipant: function (participantId, participant, raceId) {
 			if (User.signedIn()) {
 				var user = User.getCurrent();
-
-				if (User.signedIn()) {
-					races.$child(user.username).$child(raceId).$child('participants').$child(participantId).$update(participant);
-				}
+				races.$child(user.username).$child(raceId).$child('participants').$child(participantId).$update(participant);
 			}
 		},
 		addParticipantToRace: function  (raceId, participant) {
@@ -72,7 +76,7 @@ app.factory('Race', function ($firebase, FIREBASE_URL, User) {
 			console.log('update participant named ' + participant.name + ', raceId: ' + raceId);
 		},
 		updateParticipantWithStartNumberAndTime: function(raceId, participantId, startnumber, time, interval) {
-			console.log('update startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber + ', participant starttime: ' + ((startnumber - 1) * 15000 + time) + ', interval: ' + interval);
+//			console.log('update startnumber and time, raceId: ' + raceId + ', participantId: ' + participantId + ', startnumber: ' + startnumber + ', participant starttime: ' + ((startnumber - 1) * 15000 + time) + ', interval: ' + interval);
 			races.$child(raceId).$child('participants').$child(participantId).$update({ startnumber : startnumber, starttime : ((startnumber - 1) * interval * 1000 + time) });
 		},
 		updateParticipantWithEndtime: function(raceId, participantId, endtime) {

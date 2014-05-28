@@ -17,6 +17,7 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 	$scope.setActiveRace = function (raceId, race) {
 //		$window.alert('Selected race: ' + race.name + ', raceId: '+ raceId);
 		User.setActiveRace(raceId, race);
+		$scope.raceLockedStatus = race.locked;
 		$location.path('/#');
 	};
 
@@ -38,6 +39,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 		var msg = '';
 		if ($scope.raceLockedStatus === false) {
 			$scope.raceLockedStatus = true;
+			$scope.activeRace.race.locked = true;
+			Race.setRaceLockedStatus(raceId, $scope.activeRace.race);
 			$scope.raceLockedMsg = 'Unlock Race';
 			msg = 'locked';
 			// stackoverflow.com/questions/22135196/how-do-i-loop-through-the-children-of-a-firebase-instance
@@ -52,6 +55,8 @@ app.controller('ActiveRaceCtrl', function ($location, $scope, $rootScope, $windo
 			});
 		} else {
 			$scope.raceLockedStatus = false;
+			$scope.activeRace.race.locked = false;
+			Race.setRaceLockedStatus(raceId, $scope.activeRace.race);
 			$scope.raceLockedMsg = 'Lock Race';
 			msg = 'unlocked';
 		}
